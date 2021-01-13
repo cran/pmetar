@@ -3,8 +3,8 @@
 #' Extract and parse an air pressure value from METAR weather report.
 #'
 #' @param x character vector; a METAR weather report or reports.
-#' @param altimeter boolean; if TRUE pressure is returned in inHg (inch of mercury),
-#' for the default value of FALSE in hPa.
+#' @param altimeter boolean; if FALSE, the default value, a pressure is returned in hPa,
+#' if TRUE a pressure is returned in inHg (inch of mercury).
 #'
 #' @return a numeric vector with air pressure in inHg or hPa.
 #'
@@ -18,7 +18,7 @@
 metar_pressure <- function(x, altimeter = FALSE){
   # check if x is a data frame
   if(is.data.frame(x)){
-    stop("ERROR: Invalid input format! Argument is not an atomic vector.", call. = FALSE)
+    stop("pmetar package error: Invalid input format! Argument is not an atomic vector.", call. = FALSE)
   }
   if(!altimeter){
     cf_hPa <- 1
@@ -29,9 +29,9 @@ metar_pressure <- function(x, altimeter = FALSE){
   }
   pressure <- c(1:length(x))
   pressure <- NA
-  fP <- stringr::str_detect(x, pattern = "\\sQ\\d{4}\\s")
-  pressure[fP] <- round(as.numeric(stringr::str_sub(stringr::str_extract(x[fP], pattern = "\\sQ\\d{4}\\s"), 3, 6)) * cf_hPa, 2)
-  fP <- stringr::str_detect(x, pattern = "\\sA\\d{4}\\s")
-  pressure[fP] <- round(as.numeric(stringr::str_sub(stringr::str_extract(x[fP], pattern = "\\sA\\d{4}\\s"), 3, 6)) * cf_inHg, 2)
+  fP <- stringr::str_detect(x, pattern = "\\sQ\\d{4}")
+  pressure[fP] <- round(as.numeric(stringr::str_sub(stringr::str_extract(x[fP], pattern = "\\sQ\\d{4}"), 3, 6)) * cf_hPa, 2)
+  fP <- stringr::str_detect(x, pattern = "\\sA\\d{4}")
+  pressure[fP] <- round(as.numeric(stringr::str_sub(stringr::str_extract(x[fP], pattern = "\\sA\\d{4}"), 3, 6)) * cf_inHg, 2)
   pressure
 }

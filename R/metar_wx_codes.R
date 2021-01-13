@@ -18,14 +18,14 @@
 metar_wx_codes <- function(x) {
   # Check if x is a data frame and stop if yes
   if(is.data.frame(x)){
-    stop("ERROR: Invalid input format! Argument is not an atomic vector.", call. = FALSE)
+    stop("pmetar package error: Invalid input format! Argument is not an atomic vector.", call. = FALSE)
   }
 
   # Function matches an extracted code to a description from metarWXcodes data frame
   wx_code_resolve <- function(xcr){
     out_cr <- xcr
     for (i in 1:length(xcr)) {
-      temp <- unlist(stringr::str_extract_all(xcr[i], ".{2}"))
+      temp <- unlist(stringr::str_extract_all(as.character(xcr[i]), ".{2}"))
       out_cr[i] <- stringr::str_c(sapply(temp, function(y) metarWXcodes$Meaning[match(y, metarWXcodes$Abbreviation)]),
                                   collapse = ", ")
     }
@@ -34,7 +34,7 @@ metar_wx_codes <- function(x) {
 
   # Function single WX codes from a METAR weather report
   wx_code_extract <- function(xce) {
-    xce <- as.data.frame(xce)
+    xce <- as.data.frame(xce, stringsAsFactors = FALSE)
     wx_extracted <- xce
     wx_extracted[1:nrow(wx_extracted),] <- ""
     wx_extracted[apply(xce, 2, function(x) stringr::str_detect(x, pattern = paste0("[+](", pattern_abbrev, ")")))] <- "Heavy intensity:"
@@ -52,9 +52,9 @@ metar_wx_codes <- function(x) {
     out_ce <- c(1:nrow(wx_extracted))
     for (j in 1:nrow(wx_extracted)) {
       out_ce[j] <- paste(wx_extracted[j,], wx_resolved[j,], collapse = "; ")
-      out_ce[j] <- stringr::str_replace_all(out_ce[j], pattern = ";  ", replacement = "; ")
-      out_ce[j] <- stringr::str_trim(out_ce[j], side = "left")
-      out_ce[j] <- stringr::str_replace(out_ce[j], pattern = "[;\\s]+$", replacement =  "")
+      out_ce[j] <- stringr::str_replace_all(as.character(out_ce[j]), pattern = ";  ", replacement = "; ")
+      out_ce[j] <- stringr::str_trim(as.character(out_ce[j]), side = "left")
+      out_ce[j] <- stringr::str_replace(as.character(out_ce[j]), pattern = "[;\\s]+$", replacement =  "")
     }
     out_ce
   }

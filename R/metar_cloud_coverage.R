@@ -19,13 +19,16 @@
 metar_cloud_coverage <- function(x) {
   # check if x is a data frame
   if(is.data.frame(x)){
-    stop("ERROR: Invalid input format! Argument is not an atomic vector.", call. = FALSE)
+    stop("pmetar package error: Invalid input format! Argument is not an atomic vector.", call. = FALSE)
   }
   # function for extracting several repeating elements, like FEW030 FEW045
   multi_extracting <- function(tdist, tpattern) {
     to_remove_1 <- stringr::str_extract(tpattern, pattern = "^[A-Z]{3}")
     to_remove_2 <- stringr::str_extract(tpattern, pattern = "[A-Z]{2}$")
-    if(is.na(to_remove_2)){
+    if(tpattern == "BKN\\/{3}") {
+      to_remove_1 <- paste0(to_remove_1, "\\/{3}")
+    }
+    if(is.na(to_remove_2)) {
       dist <- tdist %>%
         dplyr::mutate_if(is.character, stringr::str_remove, pattern = to_remove_1) %>%
         dplyr::mutate_if(is.character, as.numeric)
@@ -47,12 +50,15 @@ metar_cloud_coverage <- function(x) {
                                        "SCT\\d{3}\\s",
                                        "SCT\\d{3}CB",
                                        "BKN\\d{3}\\s",
-                                       "BKN\\d{3}CB"),
+                                       "BKN\\d{3}CB",
+                                       "BKN\\/{3}"),
                       description_text = c("Few (1-2 oktas) at ",
                                            "Scattered (3-4 oktas) at ",
                                            "Scattered (3-4 oktas) cumulonimbus clouds at ",
                                            "Broken (5-7 oktas) at ",
-                                           "Broken (5-7 oktas) cumulonimbus clouds at "))
+                                           "Broken (5-7 oktas) cumulonimbus clouds at ",
+                                           "Broken clouds at NaN "),
+                      stringsAsFactors = FALSE)
   out <- c(1:length(x))
   out[1:length(x)] <- ""
   # SKC - "No cloud/Sky clear" used worldwide but in
@@ -69,11 +75,12 @@ metar_cloud_coverage <- function(x) {
   out[fT] <- paste0(out[fT], "No (nil) significant cloud, ")
   # iterate through FEWnnn, SCTnnn, SCTnnnCB, BKNnnn, BKNnnnCB
   for (i in 1:nrow(lp_dt)) {
-    fT <- stringr::str_detect(x, pattern = lp_dt$pattern_text[i])
+    fT <- stringr::str_detect(x, pattern = as.character(lp_dt$pattern_text[i]))
     if(sum(fT) > 0) {
-      df_dist <- as.data.frame(stringr::str_extract_all(x[fT], pattern = lp_dt$pattern_text[i], simplify = TRUE))
-      ldist <- multi_extracting(df_dist, lp_dt$pattern_text[i])
-      out[fT] <- paste0(out[fT], lp_dt$description_text[i], ldist$ft, " ft (", ldist$m, " m), ")
+      df_dist <- as.data.frame(stringr::str_extract_all(x[fT], pattern = as.character(lp_dt$pattern_text[i]), simplify = TRUE),
+                               stringsAsFactors = FALSE)
+      ldist <- multi_extracting(df_dist, as.character(lp_dt$pattern_text[i]))
+      out[fT] <- paste0(out[fT], as.character(lp_dt$description_text[i]), ldist$ft, " ft (", ldist$m, " m), ")
     }
   }
   # OVCnnn

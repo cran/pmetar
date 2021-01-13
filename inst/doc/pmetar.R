@@ -6,6 +6,7 @@ knitr::opts_chunk$set(
 )
 
 ## ----get a METAR report with ICAO code----------------------------------------
+library(dplyr)
 library(pmetar)
 metar_get("EPWA")
 
@@ -86,6 +87,13 @@ metar_pressure("EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG", al
 metar_windshear("CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134")
 
 ## -----------------------------------------------------------------------------
+metar_rwy_visibility("CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134")
+
+## -----------------------------------------------------------------------------
+metar_rwy_visibility("CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134",
+                     metric = FALSE)
+
+## -----------------------------------------------------------------------------
 head(dm)
 
 ## -----------------------------------------------------------------------------
@@ -96,4 +104,9 @@ names(decoded_metars)
 
 ## -----------------------------------------------------------------------------
 print.data.frame(head(decoded_metars))
+
+## -----------------------------------------------------------------------------
+if (!grepl('SunOS',Sys.info()['sysname'])){
+  decoded_metars %>% as_tibble %>% rmarkdown::paged_table()  
+}
 
