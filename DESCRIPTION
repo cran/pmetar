@@ -1,7 +1,7 @@
 Type: Package
 Package: pmetar
 Title: Processing METAR Weather Reports
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     c(person(given = "Pawel",
              family = "Cwiek",
@@ -26,18 +26,18 @@ License: GPL (>= 3)
 URL: https://github.com/prcwiek/pmetar
 BugReports: https://github.com/prcwiek/pmetar/issues
 Depends: R (>= 3.5.0), utils, stats
-Imports: dplyr, lubridate, magrittr, RCurl, tidyr, stringr
+Imports: dplyr, httr, lubridate, magrittr, RCurl, tidyr, stringr
 Suggests: knitr, rmarkdown, testthat, tibble
 VignetteBuilder: knitr
 LazyData: true
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-01-12 21:28:17 UTC; pawel
+Packaged: 2021-03-03 08:44:41 UTC; pawel
 Author: Pawel Cwiek [aut, cre],
   David Megginson [ctb] (Author of data set with airports list
     https://ourairports.com/data/),
   Greg Thompson [ctb] (Author of data set with airports list
     https://www.aviationweather.gov/docs/metar/stations.txt)
 Repository: CRAN
-Date/Publication: 2021-01-13 10:30:03 UTC
+Date/Publication: 2021-03-03 23:20:06 UTC

@@ -105,8 +105,3 @@ names(decoded_metars)
 ## -----------------------------------------------------------------------------
 print.data.frame(head(decoded_metars))
 
-## -----------------------------------------------------------------------------
-if (!grepl('SunOS',Sys.info()['sysname'])){
-  decoded_metars %>% as_tibble %>% rmarkdown::paged_table()  
-}
-
