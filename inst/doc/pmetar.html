@@ -38,6 +38,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -163,14 +164,14 @@ Let’s download a current METAR weather report for Warsaw Okecie Airport. Its I
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting information from Aviation Weather Center www.aviationweather.gov/metar</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EPWA 030830Z 15003KT 110V190 0500 R33/0600U FZFG VV002 M00/M00 Q1030 BECMG 0800 FG&quot;</span></span></code></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EPWA 042100Z 17007KT CAVOK 08/05 Q1006 NOSIG&quot;</span></span></code></pre></div>
 <p>Now let’s take a look at Newark Liberty International Airport, EWR IATA code. This type of code you find on your airplane tickets.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_get</span>(<span class="st">&quot;EWR&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting information from Aviation Weather Center www.aviationweather.gov/metar</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KEWR 030751Z 23009KT 10SM FEW250 M02/M10 A3001 RMK AO2 SLP162 T10171100&quot;</span></span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KEWR 042051Z 01004KT 10SM FEW060 FEW200 BKN240 11/M05 A3027 RMK AO2 SLP251 T01061050 56010&quot;</span></span></code></pre></div>
 <p>The above message is intended for professionals like pilots or air traffic controllers. The first purpose of preparing the pmetar package was the need of extracting wind speed and air pressure values from METAR reports for some airports in Poland. Later the package functionality was extended. We will go through the main functions with a historical METAR report from John F. Kennedy International Airport.</p>
 </div>
 <div id="downloading-historical-metar-weather-report" class="section level2">
@@ -210,9 +211,9 @@ Let’s download a current METAR weather report for Warsaw Okecie Airport. Its I
 <p>and find the <strong>KJFK</strong> geographical coordinates, elevation, airport IATA code, airport name and source of information.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_location</span>(<span class="fu">metar_airport</span>(my_report))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/airports.csv</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 7</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 7</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ICAO_Code IATA_Code Airport_Name      Longitude Latitude Elevation Source     </span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      </span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 KJFK      JFK       John F Kennedy I…     -73.8     40.6      3.96 http://our…</span></span></code></pre></div>
@@ -371,7 +372,7 @@ The dew point can be decoded from the last two digits 23/<strong>20</strong>, or
 <p>Now we can decode all elements and place them in the tibble. It is possible to choose between Metric (the default metric = TRUE) or Imperial (metric = FALSE) systems. Pressure valuesc can be decoded in hPa (the default altimeter = FALSE) or in mmHg (altimeter = TRUE).</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>decoded_metars <span class="ot">&lt;-</span> <span class="fu">metar_decode</span>(dm)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/airports.csv</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span></code></pre></div>
 <p>The following columns were created:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(decoded_metars)</span>
@@ -430,12 +431,12 @@ The dew point can be decoded from the last two digits 23/<strong>20</strong>, or
 <span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                                       John F Kennedy International Airport</span></span>
 <span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                                       John F Kennedy International Airport</span></span>
 <span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Airport_IATA Longitude Latitude Elevation         Decode_Date</span></span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          JFK  -73.7789  40.6398    3.9624 2021-03-03 09:44:40</span></span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          JFK  -73.7789  40.6398    3.9624 2021-03-03 09:44:40</span></span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          JFK  -73.7789  40.6398    3.9624 2021-03-03 09:44:40</span></span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4          JFK  -73.7789  40.6398    3.9624 2021-03-03 09:44:40</span></span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5          JFK  -73.7789  40.6398    3.9624 2021-03-03 09:44:40</span></span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6          JFK  -73.7789  40.6398    3.9624 2021-03-03 09:44:40</span></span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          JFK  -73.7789  40.6398    3.9624 2021-11-04 22:20:19</span></span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          JFK  -73.7789  40.6398    3.9624 2021-11-04 22:20:19</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          JFK  -73.7789  40.6398    3.9624 2021-11-04 22:20:19</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4          JFK  -73.7789  40.6398    3.9624 2021-11-04 22:20:19</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5          JFK  -73.7789  40.6398    3.9624 2021-11-04 22:20:19</span></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6          JFK  -73.7789  40.6398    3.9624 2021-11-04 22:20:19</span></span>
 <span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                            Original_METAR</span></span>
 <span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 202006250000 METAR KJFK 250000Z AUTO 27015KT 10SM CLR 28/12 A2978 RMK T02800120 MADISHF</span></span>
 <span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 202006250005 METAR KJFK 250005Z AUTO 26014KT 10SM CLR 28/11 A2978 RMK T02800110 MADISHF</span></span>

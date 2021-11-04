@@ -5,6 +5,11 @@
 <!-- badges: start -->
 
 [![CRAN](https://www.r-pkg.org/badges/version/pmetar)](https://cran.r-project.org/package=pmetar)
+[![cran
+checks](https://cranchecks.info/badges/worst/pmetar)](https://cranchecks.info/pkgs/pmetar)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![monthly](https://cranlogs.r-pkg.org/badges/pmetar)](https://www.rpackages.io/package/pmetar)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/pmetar)](https://www.rpackages.io/package/pmetar)
 <!-- badges: end -->
@@ -14,15 +19,15 @@ and decode basic parameters.
 
 ### METAR weather reports source web pages
 
-The function metar\_get scraps data from two web pages:
+The main functions scrap data from the below web pages:
 
-1.  For current reports:
+1.  For current reports, the function *metar_get*:
 
 -   Aviation Weather Center <https://www.aviationweather.gov/metar>
     </li>
     <br>
 
-1.  For historical reports:
+2.  For historical reports, the function *metar_get_historical*:
 
 -   Iowa Environmental Mesonet web page of Iowa State University
     ASOS-AWOS-METAR <http://mesonet.agron.iastate.edu/AWOS/>
@@ -60,7 +65,7 @@ CRAN version
 install.packages("pmetar")
 ```
 
-Get the development version 0.3.1 from github:
+Get the development version 0.3.2 from github:
 
 ``` r
 # install.packages("devtools")
