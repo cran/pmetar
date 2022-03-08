@@ -1,7 +1,7 @@
 Type: Package
 Package: pmetar
 Title: Processing METAR Weather Reports
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: 
     c(person(given = "Pawel",
              family = "Cwiek",
@@ -33,11 +33,11 @@ LazyData: true
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2021-11-04 21:20:20 UTC; pawel
+Packaged: 2022-03-07 19:53:39 UTC; pawel
 Author: Pawel Cwiek [aut, cre],
   David Megginson [ctb] (Author of data set with airports list
     https://ourairports.com/data/),
   Greg Thompson [ctb] (Author of data set with airports list
     https://www.aviationweather.gov/docs/metar/stations.txt)
 Repository: CRAN
-Date/Publication: 2021-11-05 00:20:08 UTC
+Date/Publication: 2022-03-08 08:40:02 UTC
