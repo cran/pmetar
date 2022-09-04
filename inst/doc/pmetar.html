@@ -364,7 +364,7 @@ report can be got from Aviation Weather Center <a href="https://www.aviationweat
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting information from Aviation Weather Center www.aviationweather.gov/metar</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EPWA 071930Z 36009KT 9999 SCT046 03/M02 Q1020 NOSIG&quot;</span></span></code></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EPWA 292000Z 25007KT CAVOK 17/13 Q1017 NOSIG&quot;</span></span></code></pre></div>
 <p>Now let’s take a look at Newark Liberty International Airport, EWR
 IATA code. This type of code you find on your airplane tickets.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_get</span>(<span class="st">&quot;EWR&quot;</span>)</span>
@@ -372,7 +372,7 @@ IATA code. This type of code you find on your airplane tickets.</p>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting information from Aviation Weather Center www.aviationweather.gov/metar</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KEWR 071951Z 22024G34KT 10SM SCT046 SCT100 BKN220 OVC250 23/13 A2961 RMK AO2 PK WND 22034/1943 SLP027 T02330128&quot;</span></span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KEWR 291951Z 13010G17KT 10SM FEW040 FEW050 29/21 A3004 RMK AO2 SLP173 T02940206&quot;</span></span></code></pre></div>
 <p>The above message is intended for professionals like pilots or air
 traffic controllers. The first purpose of preparing the pmetar package
 was the need of extracting wind speed and air pressure values from METAR
@@ -386,34 +386,61 @@ report from John F. Kennedy International Airport.</p>
 reports for a defined period of time. The default online source of METAR
 reports, <em>from = “iastate”</em> is the Iowa Environmental Mesonet web
 page of Iowa State University ASOS-AWOS-METAR <a href="http://mesonet.agron.iastate.edu/AWOS/" class="uri">http://mesonet.agron.iastate.edu/AWOS/</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dm <span class="ot">&lt;-</span> <span class="fu">metar_get_historical</span>(<span class="st">&quot;JFK&quot;</span>, <span class="at">start_date =</span> <span class="st">&quot;2020-06-25&quot;</span>, <span class="at">end_date =</span> <span class="st">&quot;2020-06-29&quot;</span>, <span class="at">from =</span> <span class="st">&quot;iastate&quot;</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Iowa Environmental Mesonet web page of Iowa State University</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ASOS-AWOS-METAR http://mesonet.agron.iastate.edu/AWOS/</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dm)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006250000 METAR KJFK 250000Z AUTO 27015KT 10SM CLR 28/12 A2978 RMK T02800120 MADISHF&quot;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;202006250005 METAR KJFK 250005Z AUTO 26014KT 10SM CLR 28/11 A2978 RMK T02800110 MADISHF&quot;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;202006250010 METAR KJFK 250010Z AUTO 27016KT 10SM CLR 28/12 A2979 RMK T02800120 MADISHF&quot;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;202006250015 METAR KJFK 250015Z AUTO 26014KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF&quot;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;202006250020 METAR KJFK 250020Z AUTO 27013KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF&quot;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] &quot;202006250025 METAR KJFK 250025Z AUTO 27014KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dm <span class="ot">&lt;-</span> <span class="fu">metar_get_historical</span>(<span class="st">&quot;JFK&quot;</span>, <span class="at">start_date =</span> <span class="st">&quot;2020-06-27&quot;</span>, <span class="at">end_date =</span> <span class="st">&quot;2020-06-29&quot;</span>, <span class="at">from =</span> <span class="st">&quot;iastate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dm)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF&quot;   </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;202006270005 METAR KJFK 270005Z AUTO 19008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF&quot;   </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;202006270010 METAR KJFK 270010Z AUTO 20008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF&quot;   </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;202006270015 METAR KJFK 270015Z AUTO 21005KT 10SM FEW110 24/18 A2990 RMK T02400180 MADISHF&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;202006270020 METAR KJFK 270020Z AUTO 21005KT 10SM SCT110 24/18 A2990 RMK T02400180 MADISHF&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] &quot;202006270025 METAR KJFK 270025Z AUTO 23008KT 10SM SCT110 24/17 A2990 RMK T02400170 MADISHF&quot;</span></span></code></pre></div>
 <p>The second backup source, <em>from = “ogimet”</em> is Weather
 Information Service provided by Ogimet <a href="http://www.ogimet.com/" class="uri">http://www.ogimet.com/</a>. Please take into consideration
 that Ogimet usually blocks too frequent requests for data due to the
 server overload, the requested period is limited to 31 days and for the
 most of airports METAR reports are available from the beginning of the
 year 2005.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_get_historical</span>(<span class="st">&quot;JFK&quot;</span>, <span class="at">start_date =</span> <span class="st">&quot;2020-06-25&quot;</span>, <span class="at">end_date =</span> <span class="st">&quot;2020-06-29&quot;</span>, <span class="at">from =</span> <span class="st">&quot;ogimet&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_get_historical</span>(<span class="st">&quot;JFK&quot;</span>, <span class="at">start_date =</span> <span class="st">&quot;2020-06-27&quot;</span>, <span class="at">end_date =</span> <span class="st">&quot;2020-06-29&quot;</span>, <span class="at">from =</span> <span class="st">&quot;ogimet&quot;</span>)</span></code></pre></div>
+<p>In the package version from 0.4.0 it is possible to check the syntax
+of downloaded METAR reports with the function metar_is_correct(). Also
+in several functions the additional parameter <em>check</em> was
+implemented. The default value is TRUE. If it is set to FALSE decoding
+of METAR reports should work as in the previouse package versions.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_is_correct</span>(dm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE</span></span></code></pre></div>
+<p>Let’s one report with incorrect one and check how it works.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> <span class="fu">c</span>(dm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;202006261625 SPEC KJFK 261625Z AUTO 28009KT 10SM CLR 30/12 A2995 RMK T03000120&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_is_correct</span>(dc)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE</span></span></code></pre></div>
+<p>It is possible to select incorrect reports from input.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dc[<span class="sc">!</span><span class="fu">metar_is_correct</span>(dc)]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006261625 SPEC KJFK 261625Z AUTO 28009KT 10SM CLR 30/12 A2995 RMK T03000120&quot;</span></span></code></pre></div>
+<p>The function has the parameter verbose which helps to identify
+incorrect reports. The index and the incorrect METAR are displayed</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_is_correct</span>(dc, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Incorrect METAR report:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6     202006261625 SPEC KJFK 261625Z AUTO 28009KT 10SM CLR 30/12 A2995</span></span></code></pre></div>
+<p>The check of syntax was implemented in the following functions,
+however it must be enabled by setting check = TRUE. Only in the function
+metar_decode() it is set to TRUE by default.</p>
+<ul>
+<li>metar_decode()</li>
+<li>metar_dew_point()</li>
+<li>metar_dir()</li>
+<li>metar_gust()</li>
+<li>metar_pressure()</li>
+<li>metar_speed()</li>
+<li>metar_temp()</li>
+</ul>
 <p>We will parse the last report from the above <em>dm</em>. In
 historical reports dates and hours are placed at the beginning of texts.
 Normally it’s extracted and parsed, but for now let’s remove it</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(dm[<span class="fu">length</span>(dm)])</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006292355 METAR KJFK 292355Z AUTO 07007KT 10SM FEW080 24/18 A2986 RMK T02400180  LTG DSNT S! MADISHF&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>my_report <span class="ot">&lt;-</span> <span class="fu">substr</span>(dm[<span class="fu">length</span>(dm)], <span class="dv">14</span>, <span class="fu">nchar</span>(dm[<span class="fu">length</span>(dm)]))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>my_report</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;METAR KJFK 292355Z AUTO 07007KT 10SM FEW080 24/18 A2986 RMK T02400180  LTG DSNT S! MADISHF&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(dm[<span class="fu">length</span>(dm)])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006270025 METAR KJFK 270025Z AUTO 23008KT 10SM SCT110 24/17 A2990 RMK T02400170 MADISHF&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>my_report <span class="ot">&lt;-</span> <span class="fu">substr</span>(dm[<span class="fu">length</span>(dm)], <span class="dv">14</span>, <span class="fu">nchar</span>(dm[<span class="fu">length</span>(dm)]))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>my_report</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;METAR KJFK 270025Z AUTO 23008KT 10SM SCT110 24/17 A2990 RMK T02400170 MADISHF&quot;</span></span></code></pre></div>
 <p>It has to be noted that the report part after the RMK, remarks, is
 not analyzed, except the temperature information, which is provide more
 precisely in remarks.</p>
@@ -427,30 +454,31 @@ circumstances, a text SPECI replaces METAR.</p>
 <h3>Airport</h3>
 <p>The second four letters element, <strong>KJFK</strong> identifies an
 airport from which a METAR issued. We can extract it</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_airport</span>(my_report)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KJFK&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_airport</span>(my_report)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KJFK&quot;</span></span></code></pre></div>
 <p>and find the <strong>KJFK</strong> geographical coordinates,
 elevation, airport IATA code, airport name and source of
 information.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_location</span>(<span class="fu">metar_airport</span>(my_report))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 7</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ICAO_Code IATA_Code Airport_Name           Longitude Latitude Elevation Source</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 KJFK      JFK       John F Kennedy Intern…     -73.8     40.6      3.96 http:…</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_location</span>(<span class="fu">metar_airport</span>(my_report))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 7</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ICAO_Code IATA_Code Airport_Name                Longi…¹ Latit…² Eleva…³ Source</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 KJFK      JFK       John F Kennedy Internation…   -73.8    40.6    3.96 http:…</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable names ¹​Longitude, ²​Latitude, ³​Elevation</span></span></code></pre></div>
 </div>
 <div id="day-and-time" class="section level3">
 <h3>Day and time</h3>
 <p>The third element <strong>282355Z</strong> includes a day of a month,
 a time and a time zone.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_day</span>(my_report)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 29</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_hour</span>(my_report)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;23:55&quot;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_time_zone</span>(my_report)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Z&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_day</span>(my_report)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 27</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_hour</span>(my_report)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;00:25&quot;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_time_zone</span>(my_report)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Z&quot;</span></span></code></pre></div>
 <p>The fourth element, in our case <strong>AUTO</strong> informs that a
 report was generated automatically. If a report was manually corrected
 it is <strong>COR</strong>. This element is not taken into consideration
@@ -462,27 +490,27 @@ by the package pmetar.</p>
 digits informs about a wind direction in degrees. Two next digits are a
 wind speed and the letters the end define units, here KT, hence a wind
 speed is in knots.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dir</span>(my_report)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;70&quot;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_speed</span>(my_report, <span class="at">metric =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.601113</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_speed</span>(my_report, <span class="at">metric =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 7</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dir</span>(my_report)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;230&quot;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_speed</span>(my_report, <span class="at">metric =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4.115558</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_speed</span>(my_report, <span class="at">metric =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 8</span></span></code></pre></div>
 <p>The function metar_speed reports a wind speed in m/s with the default
 value of the parameter <em>metric = TRUE</em>, or in knots when
 <em>metric = FALSE</em>.<br />
 When a wind direction varies, a METAR report has additional component,
 like <strong>140V200</strong>, which informs that a wind direction
 fluctuates from 140 to 200 degrees.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>variable_direction_METAR <span class="ot">&lt;-</span> <span class="st">&quot;EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG&quot;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dir</span>(variable_direction_METAR)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;180, variable from 140 to 200&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>variable_direction_METAR <span class="ot">&lt;-</span> <span class="st">&quot;EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG&quot;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dir</span>(variable_direction_METAR)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;180; variable from 140 to 200&quot;</span></span></code></pre></div>
 <p>In this case an output is character what can be useless for
 statistical calculations. If only main direction in the numeric format
 is needed, it is possible to set the parameter <em>numeric_only =
 TRUE</em>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dir</span>(variable_direction_METAR, <span class="at">numeric_only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 180</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dir</span>(variable_direction_METAR, <span class="at">numeric_only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 180</span></span></code></pre></div>
 </div>
 <div id="visibility" class="section level3">
 <h3>Visibility</h3>
@@ -490,71 +518,76 @@ TRUE</em>.</p>
 10 statue miles. With the default value of the paremeter <em>metric=
 TRUE</em> we get output in meters. For <em>metric = FALSE</em> in
 statute miles.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_visibility</span>(my_report, <span class="at">metric =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;16093.44&quot;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_visibility</span>(my_report, <span class="at">metric =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;10&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_visibility</span>(my_report, <span class="at">metric =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;16093.44&quot;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_visibility</span>(my_report, <span class="at">metric =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;10&quot;</span></span></code></pre></div>
 </div>
 <div id="weather-conditions" class="section level3">
 <h3>Weather conditions</h3>
-<p>The function metar_wx_codes extracts and parses the below weather
-conditions codes:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>metarWXcodes</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             Type Abbreviation                                         Meaning</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     Descriptor           MI                         Shallow (French: Mince)</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     Descriptor           BC                         Patches (French: Bancs)</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     Descriptor           BL                                         Blowing</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     Descriptor           TS                                    Thunderstorm</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     Descriptor           PR                                         Partial</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6     Descriptor           DR                                    Low drifting</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7     Descriptor           SH                                         Showers</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8     Descriptor           FZ                                        Freezing</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9      Intensity            -                                 Light intensity</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10     Intensity            +                                 Heavy intensity</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11     Intensity        blank                              Moderate intensity</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12     Intensity           VC                                 In the vicinity</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13   Obscuration           FG                                             Fog</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14   Obscuration           BR                            Mist (French: Brume)</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15   Obscuration           DU                                 Widespread Dust</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16   Obscuration           SA                                            Sand</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17   Obscuration           VA                                    Volcanic Ash</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18   Obscuration           HZ                                            Haze</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19   Obscuration           FU                           Smoke (French: Fumee)</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20   Obscuration           PY                                           Spray</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21         Other           SQ                                          Squall</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22         Other           DS                                       Duststorm</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23         Other           FC                                    Funnel Cloud</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24         Other           PO                             Dust or Sand Whirls</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25         Other           SS                                       Sandstorm</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26 Precipitation           RA                                            Rain</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27 Precipitation           SN                                            Snow</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 Precipitation           IC                                    Ice Crystals</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29 Precipitation           GR                            Hail (French: Grele)</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30 Precipitation           UP                           Unknown Precipitation</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31 Precipitation           DZ                                         Drizzle</span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32 Precipitation           SG                                     Snow Grains</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33 Precipitation           PL                                     Ice Pellets</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34 Precipitation           GS Small Hail and/or Snow Pellets (French: Gresil)</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35 Precipitation                                                             </span></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36          Time            B                                   Began At Time</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37          Time     2 digits                         Minutes of current hour</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38          Time            E                                   Ended At Time</span></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39          Time     4 digits                          Hour/Minutes Zulu Time</span></span></code></pre></div>
+<p>The function metar_wx_codes() extracts and parses the below weather
+conditions codes.<br />
+In the package version 0.4.0 the parameter <em>sep</em> with the default
+value “;” was introduce. It allows to avoid problems with saving output
+in .csv files. Two values are allowed, comma and semicolon. If you need
+to get the function output separated by commas just set <em>sep =
+“,”</em>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>metarWXcodes</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             Type Abbreviation                                         Meaning</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     Descriptor           MI                         Shallow (French: Mince)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     Descriptor           BC                         Patches (French: Bancs)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     Descriptor           BL                                         Blowing</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     Descriptor           TS                                    Thunderstorm</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     Descriptor           PR                                         Partial</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6     Descriptor           DR                                    Low drifting</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7     Descriptor           SH                                         Showers</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8     Descriptor           FZ                                        Freezing</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9      Intensity            -                                 Light intensity</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10     Intensity            +                                 Heavy intensity</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11     Intensity        blank                              Moderate intensity</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12     Intensity           VC                                 In the vicinity</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13   Obscuration           FG                                             Fog</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14   Obscuration           BR                            Mist (French: Brume)</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15   Obscuration           DU                                 Widespread Dust</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16   Obscuration           SA                                            Sand</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17   Obscuration           VA                                    Volcanic Ash</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18   Obscuration           HZ                                            Haze</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19   Obscuration           FU                           Smoke (French: Fumee)</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20   Obscuration           PY                                           Spray</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21         Other           SQ                                          Squall</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22         Other           DS                                       Duststorm</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23         Other           FC                                    Funnel Cloud</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24         Other           PO                             Dust or Sand Whirls</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25         Other           SS                                       Sandstorm</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26 Precipitation           RA                                            Rain</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27 Precipitation           SN                                            Snow</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 Precipitation           IC                                    Ice Crystals</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29 Precipitation           GR                            Hail (French: Grele)</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30 Precipitation           UP                           Unknown Precipitation</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31 Precipitation           DZ                                         Drizzle</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32 Precipitation           SG                                     Snow Grains</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33 Precipitation           PL                                     Ice Pellets</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34 Precipitation           GS Small Hail and/or Snow Pellets (French: Gresil)</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35 Precipitation                                                             </span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36          Time            B                                   Began At Time</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37          Time     2 digits                         Minutes of current hour</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38          Time            E                                   Ended At Time</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39          Time     4 digits                          Hour/Minutes Zulu Time</span></span></code></pre></div>
 <p>In our METAR examples part <strong>-RA</strong> informs about weather
 conditions.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_wx_codes</span>(my_report)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_wx_codes</span>(my_report)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;&quot;</span></span></code></pre></div>
 <p>This part of a METAR can be quite complex, like in the below
 example:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_wx_codes</span>(<span class="st">&quot;202002022205 METAR KEWR 022205Z AUTO 24008KT 6SM -RA -SN BR SCT006 BKN014 OVC024 02/01 A2954 RMK T00200010 MADISHF&quot;</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Light intensity: Rain; Light intensity: Snow; Mist (French: Brume)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_wx_codes</span>(<span class="st">&quot;202002022205 METAR KEWR 022205Z AUTO 24008KT 6SM -RA -SN BR SCT006 BKN014 OVC024 02/01 A2954 RMK T00200010 MADISHF&quot;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Light intensity: Rain; Light intensity: Snow; Mist (French: Brume)&quot;</span></span></code></pre></div>
 </div>
 <div id="cloud-coverage" class="section level3">
 <h3>Cloud coverage</h3>
 <p>Next part, <strong>SCT028 SCT035 BKN079</strong>, informs about a
 cloud coverage</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_cloud_coverage</span>(my_report)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Few (1-2 oktas) at 8000 ft (2438.4 m)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_cloud_coverage</span>(my_report)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Scattered (3-4 oktas) at 11000 ft (3352.8 m)&quot;</span></span></code></pre></div>
 </div>
 <div id="temperature-and-dew-point" class="section level3">
 <h3>Temperature and dew point</h3>
@@ -565,8 +598,8 @@ marker <em>T02300200</em>, more precise but not always available.<br />
 The temperature is coded in Celsius degrees, here
 <strong>23</strong>/20, or more detailed in
 T0<strong>230</strong>0200.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_temp</span>(my_report)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 24</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_temp</span>(my_report)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 24</span></span></code></pre></div>
 <p>If there is a letter M in the front of two digits,
 <strong>M</strong>23/00, or there is a digit one after T,
 T<strong>1</strong>230, the temperature is below zero Celsius
@@ -577,14 +610,14 @@ T02300<strong>200</strong>. Dew points below zero Celsius degrees are
 decoded in the same method as above. For example 04/<strong>M</strong>03
 or T0039<strong>1</strong>033 mean that the dew point temperature is -3
 Celsius degrees or more precisely -3.3 Celsius degrees.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dew_point</span>(my_report)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 18</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dew_point</span>(my_report)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 17</span></span></code></pre></div>
 <p>Here there is a report with the more precise temperature information
 in the RMK remarks part.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_temp</span>(<span class="st">&quot;202001010851 METAR KEWR 010851Z 27010KT 10SM FEW030 BKN070 BKN100 BKN210 04/M03 A2969 RMK SLP054 T00391033 52012&quot;</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.9</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dew_point</span>(<span class="st">&quot;202001010851 METAR KEWR 010851Z 27010KT 10SM FEW030 BKN070 BKN100 BKN210 04/M03 A2969 RMK SLP054 T00391033 52012&quot;</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -3.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_temp</span>(<span class="st">&quot;202001010851 METAR KEWR 010851Z 27010KT 10SM FEW030 BKN070 BKN100 BKN210 04/M03 A2969 RMK SLP054 T00391033 52012&quot;</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.9</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_dew_point</span>(<span class="st">&quot;202001010851 METAR KEWR 010851Z 27010KT 10SM FEW030 BKN070 BKN100 BKN210 04/M03 A2969 RMK SLP054 T00391033 52012&quot;</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -3.3</span></span></code></pre></div>
 </div>
 <div id="pressure" class="section level3">
 <h3>Pressure</h3>
@@ -592,34 +625,39 @@ in the RMK remarks part.</p>
 <strong>A2972</strong> as inHg (inch of mercury). With the default
 parameter <em>altimeter = FALSE</em>, the function metar_pressure
 returns a pressure in hPa.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_pressure</span>(my_report)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1011.18</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_pressure</span>(my_report)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1012.53</span></span></code></pre></div>
 <p>The pressure value can be also presented in a METAR report as
 <strong>Q1008</strong>, already in hPa.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_pressure</span>(<span class="st">&quot;EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG&quot;</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1008</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_pressure</span>(<span class="st">&quot;EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG&quot;</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1008</span></span></code></pre></div>
 <p>If a pressure is needed in inHg (inch of mercury), the parameter
 <em>altimeter</em> has to be set to TRUE.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_pressure</span>(<span class="st">&quot;EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG&quot;</span>, <span class="at">altimeter =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 29.77</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_pressure</span>(<span class="st">&quot;EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG&quot;</span>, <span class="at">altimeter =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 29.77</span></span></code></pre></div>
 </div>
 <div id="wind-shear" class="section level3">
 <h3>Wind shear</h3>
 <p>Information about wind shear can be extracted with the use of the
-function metar_windshear()</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_windshear</span>(<span class="st">&quot;CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134&quot;</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Wind shear runway RWY36&quot;</span></span></code></pre></div>
+function metar_windshear().</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_windshear</span>(<span class="st">&quot;CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134&quot;</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Wind shear runway RWY36&quot;</span></span></code></pre></div>
 </div>
 <div id="runway-visibility" class="section level3">
 <h3>Runway visibility</h3>
 <p>Information about runways visibility can be extracted with the use of
-the function metar_rwy_visibility(), in meters</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_rwy_visibility</span>(<span class="st">&quot;CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134&quot;</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Runway visual range for runway R36 is 1219.2 meters with downward trend&quot;</span></span></code></pre></div>
+the function metar_rwy_visibility(), in meters.<br />
+In the package version 0.4.0 the parameter <em>sep</em> with the default
+value “;” was introduce. It allows to avoid problems with saving output
+in .csv files. Two values are allowed, comma and semicolon. If you need
+to get the function output separated by commas just set <em>sep =
+“,”</em>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_rwy_visibility</span>(<span class="st">&quot;CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134&quot;</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Runway visual range for runway R36 is 1219.2 meters with downward trend&quot;</span></span></code></pre></div>
 <p>or in feet</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_rwy_visibility</span>(<span class="st">&quot;CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134&quot;</span>,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Runway visual range for runway R36 is 4000 ft with downward trend&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_rwy_visibility</span>(<span class="st">&quot;CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 A2992 REFZRA WS RWY36 RMK SF5NS3 SLP134&quot;</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Runway visual range for runway R36 is 4000 ft with downward trend&quot;</span></span></code></pre></div>
 </div>
 </div>
 <div id="putting-all-together" class="section level2">
@@ -630,91 +668,159 @@ the function metar_rwy_visibility(), in meters</p>
 downloaded at the top of this document. Please notice that in all rows
 there are dates and hours in the front of METAR reports. It will be
 parsed and placed in the column <em>METAR_Date</em> below.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dm)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006250000 METAR KJFK 250000Z AUTO 27015KT 10SM CLR 28/12 A2978 RMK T02800120 MADISHF&quot;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;202006250005 METAR KJFK 250005Z AUTO 26014KT 10SM CLR 28/11 A2978 RMK T02800110 MADISHF&quot;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;202006250010 METAR KJFK 250010Z AUTO 27016KT 10SM CLR 28/12 A2979 RMK T02800120 MADISHF&quot;</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;202006250015 METAR KJFK 250015Z AUTO 26014KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF&quot;</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;202006250020 METAR KJFK 250020Z AUTO 27013KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF&quot;</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] &quot;202006250025 METAR KJFK 250025Z AUTO 27014KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dm)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF&quot;   </span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;202006270005 METAR KJFK 270005Z AUTO 19008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF&quot;   </span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;202006270010 METAR KJFK 270010Z AUTO 20008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF&quot;   </span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;202006270015 METAR KJFK 270015Z AUTO 21005KT 10SM FEW110 24/18 A2990 RMK T02400180 MADISHF&quot;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;202006270020 METAR KJFK 270020Z AUTO 21005KT 10SM SCT110 24/18 A2990 RMK T02400180 MADISHF&quot;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] &quot;202006270025 METAR KJFK 270025Z AUTO 23008KT 10SM SCT110 24/17 A2990 RMK T02400170 MADISHF&quot;</span></span></code></pre></div>
 <p>Now we can decode all elements and place them in the tibble. It is
 possible to choose between Metric (the default metric = TRUE) or
-Imperial (metric = FALSE) systems. Pressure valuesc can be decoded in
-hPa (the default altimeter = FALSE) or in mmHg (altimeter = TRUE).</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>decoded_metars <span class="ot">&lt;-</span> <span class="fu">metar_decode</span>(dm)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span></code></pre></div>
+Imperial (metric = FALSE) systems. Pressure values can be decoded in hPa
+(the default altimeter = FALSE) or in mmHg (altimeter = TRUE).<br />
+In the package version 0.4.0 the parameter <em>sep</em> with the default
+value “;” was introduce. It allows to avoid problems with saving output
+in .csv files. Two values are allowed, comma and semicolon. If you need
+to get the function output separated by commas just set <em>sep =
+“,”</em>. Also the parameter check with the default values TRUE was
+added. It allows to handle errors when the function is not able to
+decode METAR reports.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>decoded_metars <span class="ot">&lt;-</span> <span class="fu">metar_decode</span>(dm)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span></code></pre></div>
 <p>The following columns were created:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(decoded_metars)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;Remark&quot;              &quot;Airport_ICAO&quot;        &quot;METAR_Date&quot;         </span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [4] &quot;Day_of_Month&quot;        &quot;Hour&quot;                &quot;Time_zone&quot;          </span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;Wind_speed&quot;          &quot;Wind_speed_unit&quot;     &quot;Gust&quot;               </span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] &quot;Gust_unit&quot;           &quot;Wind_shear&quot;          &quot;Wind_direction&quot;     </span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] &quot;Temperature&quot;         &quot;Dew_point&quot;           &quot;Pressure&quot;           </span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;Pressure_unit&quot;       &quot;Visibility&quot;          &quot;Visibility_unit&quot;    </span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] &quot;Cloud_coverage&quot;      &quot;Weather_information&quot; &quot;Runway_visibility&quot;  </span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [22] &quot;Airport_Name&quot;        &quot;Airport_IATA&quot;        &quot;Longitude&quot;          </span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] &quot;Latitude&quot;            &quot;Elevation&quot;           &quot;Decode_Date&quot;        </span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [28] &quot;Original_METAR&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(decoded_metars)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;Remark&quot;              &quot;Airport_ICAO&quot;        &quot;METAR_Date&quot;         </span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [4] &quot;Day_of_Month&quot;        &quot;Hour&quot;                &quot;Time_zone&quot;          </span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;Wind_speed&quot;          &quot;Wind_speed_unit&quot;     &quot;Gust&quot;               </span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] &quot;Gust_unit&quot;           &quot;Wind_shear&quot;          &quot;Wind_direction&quot;     </span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] &quot;Temperature&quot;         &quot;Dew_point&quot;           &quot;Pressure&quot;           </span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;Pressure_unit&quot;       &quot;Visibility&quot;          &quot;Visibility_unit&quot;    </span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] &quot;Cloud_coverage&quot;      &quot;Weather_information&quot; &quot;Runway_visibility&quot;  </span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [22] &quot;Airport_Name&quot;        &quot;Airport_IATA&quot;        &quot;Longitude&quot;          </span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] &quot;Latitude&quot;            &quot;Elevation&quot;           &quot;Decode_Date&quot;        </span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [28] &quot;Original_METAR&quot;</span></span></code></pre></div>
 <p>First rows of the tibble with decoded METAR reports:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print.data.frame</span>(<span class="fu">head</span>(decoded_metars))</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                         Remark Airport_ICAO          METAR_Date</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-25 00:00:00</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-25 00:05:00</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-25 00:10:00</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-25 00:15:00</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-25 00:20:00</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-25 00:25:00</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Day_of_Month  Hour Time_zone Wind_speed Wind_speed_unit Gust Gust_unit</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           25 00:00         Z   7.716670             m/s   NA       m/s</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2           25 00:05         Z   7.202226             m/s   NA       m/s</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3           25 00:10         Z   8.231115             m/s   NA       m/s</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           25 00:15         Z   7.202226             m/s   NA       m/s</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5           25 00:20         Z   6.687781             m/s   NA       m/s</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6           25 00:25         Z   7.202226             m/s   NA       m/s</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Wind_shear Wind_direction Temperature Dew_point Pressure Pressure_unit</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       &lt;NA&gt;            270          28        12  1008.47           hPa</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       &lt;NA&gt;            260          28        11  1008.47           hPa</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       &lt;NA&gt;            270          28        12  1008.81           hPa</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       &lt;NA&gt;            260          27        12  1008.81           hPa</span></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       &lt;NA&gt;            270          27        12  1008.81           hPa</span></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       &lt;NA&gt;            270          27        12  1008.81           hPa</span></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Visibility Visibility_unit</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   16093.44               m</span></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   16093.44               m</span></span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   16093.44               m</span></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   16093.44               m</span></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   16093.44               m</span></span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   16093.44               m</span></span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                               Cloud_coverage</span></span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 No clouds below 12,000 ft (3,700 m) (U.S.) or 25,000 ft (7,600 m) (Canada)</span></span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 No clouds below 12,000 ft (3,700 m) (U.S.) or 25,000 ft (7,600 m) (Canada)</span></span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 No clouds below 12,000 ft (3,700 m) (U.S.) or 25,000 ft (7,600 m) (Canada)</span></span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 No clouds below 12,000 ft (3,700 m) (U.S.) or 25,000 ft (7,600 m) (Canada)</span></span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 No clouds below 12,000 ft (3,700 m) (U.S.) or 25,000 ft (7,600 m) (Canada)</span></span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 No clouds below 12,000 ft (3,700 m) (U.S.) or 25,000 ft (7,600 m) (Canada)</span></span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Weather_information Runway_visibility                         Airport_Name</span></span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                                       John F Kennedy International Airport</span></span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                       John F Kennedy International Airport</span></span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                                       John F Kennedy International Airport</span></span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                                       John F Kennedy International Airport</span></span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                                       John F Kennedy International Airport</span></span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                                       John F Kennedy International Airport</span></span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Airport_IATA Longitude Latitude Elevation         Decode_Date</span></span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          JFK  -73.7789  40.6398    3.9624 2022-03-07 20:53:39</span></span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          JFK  -73.7789  40.6398    3.9624 2022-03-07 20:53:39</span></span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          JFK  -73.7789  40.6398    3.9624 2022-03-07 20:53:39</span></span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4          JFK  -73.7789  40.6398    3.9624 2022-03-07 20:53:39</span></span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5          JFK  -73.7789  40.6398    3.9624 2022-03-07 20:53:39</span></span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6          JFK  -73.7789  40.6398    3.9624 2022-03-07 20:53:39</span></span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                            Original_METAR</span></span>
-<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 202006250000 METAR KJFK 250000Z AUTO 27015KT 10SM CLR 28/12 A2978 RMK T02800120 MADISHF</span></span>
-<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 202006250005 METAR KJFK 250005Z AUTO 26014KT 10SM CLR 28/11 A2978 RMK T02800110 MADISHF</span></span>
-<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 202006250010 METAR KJFK 250010Z AUTO 27016KT 10SM CLR 28/12 A2979 RMK T02800120 MADISHF</span></span>
-<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 202006250015 METAR KJFK 250015Z AUTO 26014KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF</span></span>
-<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 202006250020 METAR KJFK 250020Z AUTO 27013KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF</span></span>
-<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 202006250025 METAR KJFK 250025Z AUTO 27014KT 10SM CLR 27/12 A2979 RMK T02700120 MADISHF</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print.data.frame</span>(<span class="fu">head</span>(decoded_metars))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                         Remark Airport_ICAO          METAR_Date</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:00:00</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:05:00</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:10:00</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:15:00</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:20:00</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:25:00</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Day_of_Month  Hour Time_zone Wind_speed Wind_speed_unit Gust Gust_unit</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           27 00:00         Z   3.601113             m/s   NA       m/s</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2           27 00:05         Z   4.115558             m/s   NA       m/s</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3           27 00:10         Z   4.115558             m/s   NA       m/s</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           27 00:15         Z   2.572223             m/s   NA       m/s</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5           27 00:20         Z   2.572223             m/s   NA       m/s</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6           27 00:25         Z   4.115558             m/s   NA       m/s</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Wind_shear Wind_direction Temperature Dew_point Pressure Pressure_unit</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       &lt;NA&gt;            190          23        18  1012.53           hPa</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       &lt;NA&gt;            190          24        18  1012.53           hPa</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       &lt;NA&gt;            200          24        18  1012.53           hPa</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       &lt;NA&gt;            210          24        18  1012.53           hPa</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       &lt;NA&gt;            210          24        18  1012.53           hPa</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       &lt;NA&gt;            230          24        17  1012.53           hPa</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Visibility Visibility_unit</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   16093.44               m</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   16093.44               m</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   16093.44               m</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   16093.44               m</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   16093.44               m</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   16093.44               m</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                               Cloud_coverage</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 No clouds below 12 000 ft (3 700 m) (U.S.) or 25 000 ft (7 600 m) (Canada)</span></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 No clouds below 12 000 ft (3 700 m) (U.S.) or 25 000 ft (7 600 m) (Canada)</span></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 No clouds below 12 000 ft (3 700 m) (U.S.) or 25 000 ft (7 600 m) (Canada)</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                                     Few (1-2 oktas) at 11000 ft (3352.8 m)</span></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                               Scattered (3-4 oktas) at 11000 ft (3352.8 m)</span></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                               Scattered (3-4 oktas) at 11000 ft (3352.8 m)</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Weather_information Runway_visibility                         Airport_Name</span></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                                       John F Kennedy International Airport</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                       John F Kennedy International Airport</span></span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                                       John F Kennedy International Airport</span></span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                                       John F Kennedy International Airport</span></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                                       John F Kennedy International Airport</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                                       John F Kennedy International Airport</span></span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Airport_IATA Longitude Latitude Elevation         Decode_Date</span></span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          JFK  -73.7789  40.6398    3.9624 2022-08-29 22:03:24</span></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          JFK  -73.7789  40.6398    3.9624 2022-08-29 22:03:24</span></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          JFK  -73.7789  40.6398    3.9624 2022-08-29 22:03:24</span></span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4          JFK  -73.7789  40.6398    3.9624 2022-08-29 22:03:24</span></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5          JFK  -73.7789  40.6398    3.9624 2022-08-29 22:03:24</span></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6          JFK  -73.7789  40.6398    3.9624 2022-08-29 22:03:24</span></span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                               Original_METAR</span></span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF</span></span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    202006270005 METAR KJFK 270005Z AUTO 19008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF</span></span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    202006270010 METAR KJFK 270010Z AUTO 20008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF</span></span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 202006270015 METAR KJFK 270015Z AUTO 21005KT 10SM FEW110 24/18 A2990 RMK T02400180 MADISHF</span></span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 202006270020 METAR KJFK 270020Z AUTO 21005KT 10SM SCT110 24/18 A2990 RMK T02400180 MADISHF</span></span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 202006270025 METAR KJFK 270025Z AUTO 23008KT 10SM SCT110 24/17 A2990 RMK T02400170 MADISHF</span></span></code></pre></div>
+<p>Let’s take a look how the function handles the input data with one
+erroneous report.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_decode</span>(dc)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 28</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Remark     Airpo…¹ METAR…² Day_o…³ Hour  Time_…⁴ Wind_…⁵ Wind_…⁶  Gust Gust_…⁷</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  </span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use… KJFK    2020-0…      27 00:00 Z          3.60 m/s        NA m/s    </span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Don&#39;t use… KJFK    2020-0…      27 00:05 Z          4.12 m/s        NA m/s    </span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Don&#39;t use… KJFK    2020-0…      27 00:10 Z          4.12 m/s        NA m/s    </span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Don&#39;t use… KJFK    2020-0…      27 00:15 Z          2.57 m/s        NA m/s    </span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Don&#39;t use… KJFK    2020-0…      27 00:20 Z          2.57 m/s        NA m/s    </span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Incorrect… &lt;NA&gt;    &lt;NA&gt;         NA &lt;NA&gt;  &lt;NA&gt;      NA    m/s        NA m/s    </span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 18 more variables: Wind_shear &lt;chr&gt;, Wind_direction &lt;chr&gt;,</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Temperature &lt;dbl&gt;, Dew_point &lt;dbl&gt;, Pressure &lt;dbl&gt;, Pressure_unit &lt;chr&gt;,</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Visibility &lt;chr&gt;, Visibility_unit &lt;chr&gt;, Cloud_coverage &lt;chr&gt;,</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Weather_information &lt;chr&gt;, Runway_visibility &lt;chr&gt;, Airport_Name &lt;chr&gt;,</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Airport_IATA &lt;chr&gt;, Longitude &lt;dbl&gt;, Latitude &lt;dbl&gt;, Elevation &lt;dbl&gt;,</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Decode_Date &lt;chr&gt;, Original_METAR &lt;chr&gt;, and abbreviated variable names</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​Airport_ICAO, ²​METAR_Date, ³​Day_of_Month, ⁴​Time_zone, ⁵​Wind_speed, …</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ Use `colnames()` to see all variable names</span></span></code></pre></div>
+<p>The parameter check can set to FALSE and some values from incorrect
+reports can decoded. However the function can fail.</p>
+</div>
+<div id="decoding-one-metar-report-with-the-function-metar_print" class="section level3">
+<h3>Decoding one METAR report with the function
+<em>metar_print()</em></h3>
+<p>The function <em>metar_print()</em> it is possible to decode one
+report and display main parameters</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metar_print</span>(dm[<span class="dv">1</span>])</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Getting airport informaiton from the file downloaded from</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://ourairports.com/data/</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; created by David Megginson</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Decoded METAR report</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; --------------------</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Remarks            :  Don&#39;t use for flight planning or navigation! </span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Airport ICAO code  :  KJFK </span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; METAR date         :  2020-06-27 </span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Day of month       :  27 </span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hour               :  00:00 </span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time zone          :  Z </span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wind speed         :  3.6   m/s </span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gust               :  NA    </span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wind shear         :  NA </span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wind direction     :  190 </span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Temperature        :  23  °C </span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dew point          :  18  °C </span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Pressure           :  1012.53   hPa </span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Visibility         :  16093.44   m </span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cloud coverage     :  No clouds below 12 000 ft (3 700 m) (U.S.) or 25 000 ft (7 600 m) (Canada) </span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Weather information:   </span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Runway visibility  :   </span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Airport name       :  John F Kennedy International Airport </span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Airport IATA code  :  JFK </span></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Longitude          :  -73.7789 ° </span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Latitude           :  40.6398 ° </span></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Elevation          :  4.0 m </span></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Decode date        :  2022-08-29 22:03:24 </span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Original METAR     :  202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF</span></span></code></pre></div>
 </div>
 </div>
 </div>

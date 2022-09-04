@@ -4,13 +4,15 @@
 \alias{metar_pressure}
 \title{Get atmospheric pressure.}
 \usage{
-metar_pressure(x, altimeter = FALSE)
+metar_pressure(x, altimeter = FALSE, check = FALSE)
 }
 \arguments{
 \item{x}{character vector; a METAR weather report or reports.}
 
 \item{altimeter}{boolean; if FALSE, the default value, a pressure is returned in hPa,
 if TRUE a pressure is returned in inHg (inch of mercury).}
+
+\item{check}{logical; if TRUE the syntax of METAR reports will be checked.}
 }
 \value{
 a numeric vector with air pressure in inHg or hPa.

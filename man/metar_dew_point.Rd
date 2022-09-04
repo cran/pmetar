@@ -4,10 +4,12 @@
 \alias{metar_dew_point}
 \title{Get dew point temperature.}
 \usage{
-metar_dew_point(x)
+metar_dew_point(x, check = FALSE)
 }
 \arguments{
 \item{x}{character vector; a METAR weather report or reports.}
+
+\item{check}{logical; if TRUE the syntax of METAR reports will be checked.}
 }
 \value{
 a numeric vector with a dew point temperature in Celsius degrees.
@@ -20,5 +22,6 @@ metar_dew_point("EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG")
 metar_dew_point("CYUL 281800Z 13008KT 30SM BKN240 01/M06 A3005 RMK CI5 SLP180")
 metar_dew_point("201711271930 METAR LEMD 271930Z 02002KT CAVOK 04/M03 Q1025")
 metar_dew_point("METAR KEWR 010851Z 27010KT 10SM FEW030 BKN070 BKN100 BKN210 04/M03 A2969")
+metar_dew_point("201905121244 METAR KDCA 121244Z 05010KT 14/12 A2978 RMK P0002 T01390122")
 
 }

@@ -35,7 +35,7 @@
 metar_get_historical <- function(airport = "EPWA",
                                  start_date = "2020-01-01",
                                  end_date = "2020-01-10",
-                                 from = "iastate"){
+                                 from = "iastate") {
 
   # check if x is a data frame
   if(is.data.frame(airport)){
@@ -138,10 +138,11 @@ metar_get_historical <- function(airport = "EPWA",
   }
 
   server_link <- stringr::str_extract(link, pattern = ".+?/")
+  server_link <- paste0("https://", server_link)
   server_answer <- check_server_status(server_link)
 
-  # Check timeout problems
-  if(class(server_answer) != "response") {
+  # Check if a status is different than 200
+  if (httr::status_code(server_answer) != 200) {
     message(server_answer)
     return(invisible(NULL))
   }
@@ -187,7 +188,7 @@ metar_get_historical <- function(airport = "EPWA",
       i <- i + 1
     }
     out <- out[3:nrow(out),]
-  } else {#if(from == "iastate") {
+  } else {
     ds[,2] <- stringr::str_replace_all(ds[,2], "[[:punct:]]", "")
     ds[,2] <- stringr::str_replace_all(ds[,2], " ", "")
     ds[,3] <- stringr::str_trim(ds[,3])
