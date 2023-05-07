@@ -76,6 +76,14 @@ metar_dir(variable_direction_METAR, numeric_only = TRUE)
 metar_visibility(my_report, metric = TRUE)
 metar_visibility(my_report, metric = FALSE)
 
+## ----find visibility CAVOK----------------------------------------------------
+metar_visibility("201711271930 METAR LEMD 271930Z 02002KT CAVOK 04/M03 Q1025 NOSIG= NOSIG=")
+metar_visibility("201711271930 METAR LEMD 271930Z 02002KT CAVOK 04/M03 Q1025 NOSIG= NOSIG=", numeric_only = TRUE)
+
+## ----find visibility PdSM-----------------------------------------------------
+metar_visibility("200005120845 METAR METAR MMGL 120845Z 27005KT P6SM FEW230 18/04 A3012 RMK 00190 062 903", metric = FALSE)
+metar_visibility("200005120845 METAR METAR MMGL 120845Z 27005KT P6SM FEW230 18/04 A3012 RMK 00190 062 903", metric = FALSE, numeric_only = TRUE)
+
 ## ----weather condition codes--------------------------------------------------
 metarWXcodes
 

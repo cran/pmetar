@@ -1,7 +1,7 @@
 Type: Package
 Package: pmetar
 Title: Processing METAR Weather Reports
-Version: 0.4.0
+Version: 0.4.1
 Authors@R: c(
     person("Pawel", "Cwiek", , "prc.altodato@gmail.com", role = c("aut", "cre")),
     person("David", "Megginson", role = "ctb",
@@ -25,13 +25,13 @@ Suggests: knitr, rmarkdown, testthat, tibble
 VignetteBuilder: knitr
 LazyData: true
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2022-08-29 20:03:24 UTC; pawel
+Packaged: 2023-05-07 15:32:50 UTC; pawel
 Author: Pawel Cwiek [aut, cre],
   David Megginson [ctb] (Author of data set with airports list
     https://ourairports.com/data/),
   Greg Thompson [ctb] (Author of data set with airports list
     https://www.aviationweather.gov/docs/metar/stations.txt)
 Repository: CRAN
-Date/Publication: 2022-09-04 14:30:02 UTC
+Date/Publication: 2023-05-07 21:20:02 UTC

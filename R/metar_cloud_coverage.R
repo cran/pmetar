@@ -16,6 +16,7 @@
 #' metar_cloud_coverage("EPWA 281830Z 18009KT 140V200 9999 SCT037 03/M01 Q1008 NOSIG")
 #' metar_cloud_coverage("CYUL 281800Z 13008KT 30SM BKN240 01/M06 A3005 RMK CI5 SLP180")
 #' metar_cloud_coverage("201711271930 METAR LEMD 271930Z 02002KT CAVOK 04/M03 Q1025")
+#' metar_cloud_coverage("202103251800 METAR COR NFTL 251800Z 00000KT SCT017TCU BKN290 25/25 Q1014")
 #' metar_cloud_coverage("KEWR 011451Z 26015KT 10SM FEW030 FEW045 BKN065 04/M07 A2977", sep = ",")
 #'
 metar_cloud_coverage <- function(x, sep = ";") {
@@ -30,10 +31,7 @@ metar_cloud_coverage <- function(x, sep = ";") {
   # function for extracting several repeating elements, like FEW030 FEW045
   multi_extracting <- function(tdist, tpattern) {
     to_remove_1 <- stringr::str_extract(tpattern, pattern = "^[A-Z]{3}")
-    to_remove_2 <- stringr::str_extract(tpattern, pattern = "[A-Z]{2}$")
-    if(tpattern == "BKN\\/{3}") {
-      to_remove_1 <- paste0(to_remove_1, "\\/{3}")
-    }
+    to_remove_2 <- stringr::str_extract(tpattern, pattern = "(CB$|TCU$|///CB$|///TCU$|///)")
     if(is.na(to_remove_2)) {
       dist <- tdist %>%
         dplyr::mutate_if(is.character, stringr::str_remove, pattern = to_remove_1) %>%
@@ -44,28 +42,54 @@ metar_cloud_coverage <- function(x, sep = ";") {
         dplyr::mutate_if(is.character, stringr::str_remove, pattern = to_remove_2) %>%
         dplyr::mutate_if(is.character, as.numeric)
     }
-    dist <- dist * 100
+ 
+    dist <- dist *100
     dist_m <- dist * 0.3048
-#    dist <- tidyr::unite(dist, "ft", sep = "; ", na.rm = TRUE)
+    dist[] <- sapply(dist, function(y) {y[is.na(y)] <- "unknown"; y})
+    dist_m[] <- sapply(dist_m, function(y) {y[is.na(y)] <- "unknown"; y})
+    
     dist <- tidyr::unite(dist, "ft", sep = paste0(sep, " "), na.rm = TRUE)
-#    dist_m <- tidyr::unite(dist_m, "m", sep = "; ", na.rm = TRUE)
     dist_m <- tidyr::unite(dist_m, "m", sep = paste0(sep, " "), na.rm = TRUE)
     return(cbind(dist, dist_m))
   }
 
   # define list of patterns and description texts
   lp_dt <- data.frame(pattern_text = c("FEW\\d{3}\\s",
+                                       "FEW\\d{3}CB",
+                                       "FEW\\d{3}TCU",
+                                       "FEW///\\s",
+                                       "FEW///CB",
+                                       "FEW///TCU",
                                        "SCT\\d{3}\\s",
                                        "SCT\\d{3}CB",
+                                       "SCT\\d{3}TCU",
+                                       "SCT///\\s",
+                                       "SCT///CB",
+                                       "SCT///TCU",
                                        "BKN\\d{3}\\s",
-                                       "BKN\\d{3}CB"),
-                                       #"BKN\\/{3}"),
+                                       "BKN\\d{3}CB",
+                                       "BKN\\d{3}TCU",
+                                       "BKN///\\s",
+                                       "BKN///CB",
+                                       "BKN///TCU"),
                       description_text = c("Few (1-2 oktas) at ",
+                                           "Few (1-2 oktas) cumulonimbus clouds at ",
+                                           "Few (1-2 oktas) towering cumulus clouds at ",
+                                           "Few (1-2 oktas) at ",
+                                           "Few (1-2 oktas) cumulonimbus clouds at ",
+                                           "Few (1-2 oktas) towering cumulus clouds at ",
                                            "Scattered (3-4 oktas) at ",
                                            "Scattered (3-4 oktas) cumulonimbus clouds at ",
+                                           "Scattered (3-4 oktas) towering cumulus clouds at ",
+                                           "Scattered (3-4 oktas) at ",
+                                           "Scattered (3-4 oktas) cumulonimbus clouds at ",
+                                           "Scattered (3-4 oktas) towering cumulus clouds at ",
                                            "Broken (5-7 oktas) at ",
-                                           "Broken (5-7 oktas) cumulonimbus clouds at "),
-                                           #"Broken clouds at NaN "),
+                                           "Broken (5-7 oktas) cumulonimbus clouds at ",
+                                           "Broken (5-7 oktas) towering cumulus clouds at ",
+                                           "Broken (5-7 oktas) at ",
+                                           "Broken (5-7 oktas) cumulonimbus clouds at ",
+                                           "Broken (5-7 oktas) towering cumulus clouds at "),
                       stringsAsFactors = FALSE)
   out <- c(1:length(x))
   out[1:length(x)] <- ""
@@ -105,8 +129,6 @@ metar_cloud_coverage <- function(x, sep = ";") {
   out[fT] <- paste0(out[fT], "Clouds cannot be seen because of fog or heavy precipitation")
   fT <- stringr::str_detect(out, pattern = "(,\\s|;\\s$)")
   out[fT] <- stringr::str_sub(out[fT], 1, (nchar(out[fT]) - 2))
-  # remove double spaces
-  #out <- stringr::str_replace_all(out, pattern = "\\s\\s", replacement = " ")
   out
 }
 
