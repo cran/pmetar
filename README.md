@@ -7,6 +7,7 @@
 [![CRAN](https://www.r-pkg.org/badges/version/pmetar)](https://cran.r-project.org/package=pmetar)
 [![cran
 checks](https://badges.cranchecks.info/worst/pmetar.svg)](https://cran.r-project.org/web/checks/check_results_pmetar.html)
+[![R-CMD-check](https://github.com/prcwiek/pmetar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prcwiek/pmetar/actions/workflows/R-CMD-check.yaml)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -65,7 +66,7 @@ CRAN version
 install.packages("pmetar")
 ```
 
-Get the development version 0.4.0.2 from github:
+Get the development version 0.5.1 from github:
 
 ``` r
 # install.packages("devtools")

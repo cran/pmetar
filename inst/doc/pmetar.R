@@ -1,4 +1,4 @@
-## ---- label = "set options", include = FALSE----------------------------------
+## ----label = "set options", include = FALSE-----------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -14,7 +14,7 @@ metar_get("EPWA")
 metar_get("EWR")
 
 ## ----label = "get historical METAR reports from JFK", eval = FALSE------------
-#  dm <- metar_get_historical("JFK", start_date = "2020-06-27", end_date = "2020-06-29", from = "iastate")
+# dm <- metar_get_historical("JFK", start_date = "2020-06-27", end_date = "2020-06-29", from = "iastate")
 
 ## ----label = "create dm offline", echo = FALSE--------------------------------
 dm <- c("202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF",
@@ -27,8 +27,8 @@ dm <- c("202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T
 ## ----label = "show head of dm"------------------------------------------------
 head(dm)
 
-## ---- label = "example for Ogimet", eval = FALSE------------------------------
-#  metar_get_historical("JFK", start_date = "2020-06-27", end_date = "2020-06-29", from = "ogimet")
+## ----label = "example for Ogimet", eval = FALSE-------------------------------
+# metar_get_historical("JFK", start_date = "2020-06-27", end_date = "2020-06-29", from = "ogimet")
 
 ## ----checking the syntax of reports-------------------------------------------
 metar_is_correct(dm[1:5])

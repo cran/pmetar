@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +60,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -370,7 +370,7 @@ report can be got from Aviation Weather Center <a href="https://aviationweather.
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co">#&gt; Getting information from Aviation Weather Center aviationweather.gov/data/metar/</span></span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EPWA 251800Z 28010KT 9999 BKN005 10/09 Q0999 TEMPO BKN004&quot;</span></span></code></pre></div>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EPWA 020900Z 27009KT 9999 BKN010 01/M01 Q1028 NOSIG&quot;</span></span></code></pre></div>
 <p>Now let’s take a look at Newark Liberty International Airport, EWR
 IATA code. This type of code you find on your airplane tickets.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">metar_get</span>(<span class="st">&quot;EWR&quot;</span>)</span>
@@ -378,7 +378,7 @@ IATA code. This type of code you find on your airplane tickets.</p>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; http://ourairports.com/data/airports.csv</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Getting information from Aviation Weather Center aviationweather.gov/data/metar/</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; Don&#39;t use for flight planning or navigation!</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KEWR 251751Z 24008KT 10SM FEW150 BKN210 BKN250 23/09 A3024 RMK SLP239 T02280089 10233 20106 58021&quot;</span></span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;KEWR 020851Z 33012KT 10SM SCT050 M05/M17 A2999 RMK AO2 PK WND 30026/0753 SLP153 T10501167 53026 $&quot;</span></span></code></pre></div>
 <p>The above message is intended for professionals like pilots or air
 traffic controllers. The first purpose of preparing the pmetar package
 was the need of extracting wind speed and air pressure values from METAR
@@ -724,7 +724,7 @@ not able to decode METAR reports.</p>
 <p>First rows of the tibble with decoded METAR reports:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">print.data.frame</span>(<span class="fu">head</span>(decoded_metars))</span>
 <span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="co">#&gt;                                         Remark Airport_ICAO          METAR_Date</span></span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use for flight planning or navigation!         KJFK          2020-06-27</span></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:00:00</span></span>
 <span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#&gt; 2 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:05:00</span></span>
 <span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co">#&gt; 3 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:10:00</span></span>
 <span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="co">#&gt; 4 Don&#39;t use for flight planning or navigation!         KJFK 2020-06-27 00:15:00</span></span>
@@ -766,12 +766,12 @@ not able to decode METAR reports.</p>
 <span id="cb36-42"><a href="#cb36-42" tabindex="-1"></a><span class="co">#&gt; 5                                       John F Kennedy International Airport</span></span>
 <span id="cb36-43"><a href="#cb36-43" tabindex="-1"></a><span class="co">#&gt; 6                                       John F Kennedy International Airport</span></span>
 <span id="cb36-44"><a href="#cb36-44" tabindex="-1"></a><span class="co">#&gt;   Airport_IATA Longitude Latitude Elevation                Decode_Date</span></span>
-<span id="cb36-45"><a href="#cb36-45" tabindex="-1"></a><span class="co">#&gt; 1          JFK -73.77932 40.63945    3.9624 2023-10-25 20:08:16.707331</span></span>
-<span id="cb36-46"><a href="#cb36-46" tabindex="-1"></a><span class="co">#&gt; 2          JFK -73.77932 40.63945    3.9624 2023-10-25 20:08:16.707331</span></span>
-<span id="cb36-47"><a href="#cb36-47" tabindex="-1"></a><span class="co">#&gt; 3          JFK -73.77932 40.63945    3.9624 2023-10-25 20:08:16.707331</span></span>
-<span id="cb36-48"><a href="#cb36-48" tabindex="-1"></a><span class="co">#&gt; 4          JFK -73.77932 40.63945    3.9624 2023-10-25 20:08:16.707331</span></span>
-<span id="cb36-49"><a href="#cb36-49" tabindex="-1"></a><span class="co">#&gt; 5          JFK -73.77932 40.63945    3.9624 2023-10-25 20:08:16.707331</span></span>
-<span id="cb36-50"><a href="#cb36-50" tabindex="-1"></a><span class="co">#&gt; 6          JFK -73.77932 40.63945    3.9624 2023-10-25 20:08:16.707331</span></span>
+<span id="cb36-45"><a href="#cb36-45" tabindex="-1"></a><span class="co">#&gt; 1          JFK -73.77932 40.63945    3.9624 2025-03-02 10:14:47.768805</span></span>
+<span id="cb36-46"><a href="#cb36-46" tabindex="-1"></a><span class="co">#&gt; 2          JFK -73.77932 40.63945    3.9624 2025-03-02 10:14:47.768805</span></span>
+<span id="cb36-47"><a href="#cb36-47" tabindex="-1"></a><span class="co">#&gt; 3          JFK -73.77932 40.63945    3.9624 2025-03-02 10:14:47.768805</span></span>
+<span id="cb36-48"><a href="#cb36-48" tabindex="-1"></a><span class="co">#&gt; 4          JFK -73.77932 40.63945    3.9624 2025-03-02 10:14:47.768805</span></span>
+<span id="cb36-49"><a href="#cb36-49" tabindex="-1"></a><span class="co">#&gt; 5          JFK -73.77932 40.63945    3.9624 2025-03-02 10:14:47.768805</span></span>
+<span id="cb36-50"><a href="#cb36-50" tabindex="-1"></a><span class="co">#&gt; 6          JFK -73.77932 40.63945    3.9624 2025-03-02 10:14:47.768805</span></span>
 <span id="cb36-51"><a href="#cb36-51" tabindex="-1"></a><span class="co">#&gt;                                                                               Original_METAR</span></span>
 <span id="cb36-52"><a href="#cb36-52" tabindex="-1"></a><span class="co">#&gt; 1    202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF</span></span>
 <span id="cb36-53"><a href="#cb36-53" tabindex="-1"></a><span class="co">#&gt; 2    202006270005 METAR KJFK 270005Z AUTO 19008KT 10SM CLR 24/18 A2990 RMK T02400180 MADISHF</span></span>
@@ -788,7 +788,7 @@ erroneous report.</p>
 <span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 28</span></span>
 <span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="co">#&gt;   Remark         Airport_ICAO METAR_Date Day_of_Month Hour  Time_zone Wind_speed</span></span>
 <span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;</span></span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use for… KJFK         2020-06-27           27 00:00 Z               3.60</span></span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="co">#&gt; 1 Don&#39;t use for… KJFK         2020-06-2…           27 00:00 Z               3.60</span></span>
 <span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a><span class="co">#&gt; 2 Don&#39;t use for… KJFK         2020-06-2…           27 00:05 Z               4.12</span></span>
 <span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="co">#&gt; 3 Don&#39;t use for… KJFK         2020-06-2…           27 00:10 Z               4.12</span></span>
 <span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a><span class="co">#&gt; 4 Don&#39;t use for… KJFK         2020-06-2…           27 00:15 Z               2.57</span></span>
@@ -817,7 +817,7 @@ report and display main parameters</p>
 <span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="co">#&gt; --------------------</span></span>
 <span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co">#&gt; Remarks            :  Don&#39;t use for flight planning or navigation! </span></span>
 <span id="cb38-8"><a href="#cb38-8" tabindex="-1"></a><span class="co">#&gt; Airport ICAO code  :  KJFK </span></span>
-<span id="cb38-9"><a href="#cb38-9" tabindex="-1"></a><span class="co">#&gt; METAR date         :  2020-06-27 </span></span>
+<span id="cb38-9"><a href="#cb38-9" tabindex="-1"></a><span class="co">#&gt; METAR date         :  2020-06-27 00:00:00 </span></span>
 <span id="cb38-10"><a href="#cb38-10" tabindex="-1"></a><span class="co">#&gt; Day of month       :  27 </span></span>
 <span id="cb38-11"><a href="#cb38-11" tabindex="-1"></a><span class="co">#&gt; Hour               :  00:00 </span></span>
 <span id="cb38-12"><a href="#cb38-12" tabindex="-1"></a><span class="co">#&gt; Time zone          :  Z </span></span>
@@ -837,7 +837,7 @@ report and display main parameters</p>
 <span id="cb38-26"><a href="#cb38-26" tabindex="-1"></a><span class="co">#&gt; Longitude          :  -73.77932 ° </span></span>
 <span id="cb38-27"><a href="#cb38-27" tabindex="-1"></a><span class="co">#&gt; Latitude           :  40.63945 ° </span></span>
 <span id="cb38-28"><a href="#cb38-28" tabindex="-1"></a><span class="co">#&gt; Elevation          :  4.0 m </span></span>
-<span id="cb38-29"><a href="#cb38-29" tabindex="-1"></a><span class="co">#&gt; Decode date        :  2023-10-25 20:08:16.816151 </span></span>
+<span id="cb38-29"><a href="#cb38-29" tabindex="-1"></a><span class="co">#&gt; Decode date        :  2025-03-02 10:14:47.89202 </span></span>
 <span id="cb38-30"><a href="#cb38-30" tabindex="-1"></a><span class="co">#&gt; Original METAR     :  202006270000 METAR KJFK 270000Z AUTO 19007KT 10SM CLR 23/18 A2990 RMK T02300180 MADISHF</span></span></code></pre></div>
 </div>
 </div>
