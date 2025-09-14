@@ -54,6 +54,9 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
       item_found <- FALSE
       # -------------------------------------------------------------------------
       # cases with feet
+      # -------------------------------------------------------------------------
+      
+      # variable visibility
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}FT") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -69,7 +72,60 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist)
         item_found <- TRUE
       }
-
+      
+      # variable visibility with upward trend
+      if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}FT/U") & !item_found) {
+        out_rvr[i] <- paste0("Runway visual range for runway ",
+                             stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
+                             " is variable from ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfi, 2),
+                             " to ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfi, 2),
+                             
+                             " ", tdist, " with upward trend")
+        item_found <- TRUE
+      }
+      
+      # variable visibility with downward trend
+      if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}FT/D") & !item_found) {
+        out_rvr[i] <- paste0("Runway visual range for runway ",
+                             stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
+                             " is variable from ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfi, 2),
+                             " to ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfi, 2),
+                             
+                             " ", tdist, " with dwondward trend")
+        item_found <- TRUE
+      }
+      
+      # variable visibility greater than
+      if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}VP\\d{4}FT") & !item_found) {
+        out_rvr[i] <- paste0("Runway visual range for runway ",
+                             stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
+                             " is variable from ", 
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfi, 2),
+                             " ", tdist,
+                             " to greater than ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}VP\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfi, 2),
+                             
+                             " ", tdist)
+        item_found <- TRUE
+      }
+      
+      # static trend
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}FT\\/N")) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -80,7 +136,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist, " with static trend")
         item_found <- TRUE
       }
-
+      
+      # upward trend
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}FT\\/U") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -91,6 +148,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist, " with upward trend")
         item_found <- TRUE
       }
+      
+      # downward trend
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}FT\\/D") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -101,7 +160,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist, " with downward trend")
         item_found <- TRUE
       }
-
+      
+      # greater than
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)P\\d{4}FT") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -112,7 +172,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist)
         item_found <- TRUE
       }
-
+      
+      # "standard" case
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}FT") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -126,6 +187,9 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
 
       # -------------------------------------------------------------------------
       # cases with meters
+      # -------------------------------------------------------------------------
+      
+      # variable visibility
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}(\\s|N)") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -141,7 +205,60 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist)
         item_found <- TRUE
       }
-
+      
+      # variable visibility with upward trend
+      if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}(\\s|U)") & !item_found) {
+        out_rvr[i] <- paste0("Runway visual range for runway ",
+                             stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
+                             " is from ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfm, 2),
+                             " to ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfm, 2),
+                             
+                             " ", tdist, " with upward trend")
+        item_found <- TRUE
+      }
+      
+      # variable visibility with downward trend
+      if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}(\\s|D)") & !item_found) {
+        out_rvr[i] <- paste0("Runway visual range for runway ",
+                             stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
+                             " is from ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfm, 2),
+                             " to ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}V\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfm, 2),
+                             
+                             " ", tdist, " with downward trend")
+        item_found <- TRUE
+      }
+      
+      # variable visibility greater than
+      if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}VP\\d{4}") & !item_found) {
+        out_rvr[i] <- paste0("Runway visual range for runway ",
+                             stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
+                             " is variable from ", 
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfm, 2),
+                             " ", tdist, 
+                             " to greater than ",
+                             round(as.numeric(stringr::str_extract(stringr::str_extract(rvr[i],
+                                                                                        pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}VP\\d{4}"),
+                                                                   pattern = "\\d{4}$")) * cfm, 2),
+                             
+                             " ", tdist)
+        item_found <- TRUE
+      }
+      
+      # static trend
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}N") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -152,7 +269,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist, " with static trend")
         item_found <- TRUE
       }
-
+      
+      # upward trend
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}U") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -163,7 +281,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist, " with upward trend")
         item_found <- TRUE
       }
-
+      
+      # downward trend
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}D") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -174,7 +293,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist, " with downward trend")
         item_found <- TRUE
       }
-
+      
+      # greater than
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)P\\d{4}") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -185,7 +305,8 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
                              " ", tdist)
         item_found <- TRUE
       }
-
+      
+      # "standard" case
       if(stringr::str_detect(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)\\d{4}") & !item_found) {
         out_rvr[i] <- paste0("Runway visual range for runway ",
                              stringr::str_sub(stringr::str_extract(rvr[i], pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)"), 1, -2),
@@ -221,7 +342,7 @@ metar_rwy_visibility <- function(x, metric = TRUE, sep = ";") {
   }
 
   outvis_temp <- stringr::str_extract_all(x,
-                                          pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)(\\d{4}|[P]\\d{4}|\\d{4}V\\d{4})(\\s|(N|U|D)|FT\\s|(FT\\/N|FT\\/U|FT\\/D))",
+                                          pattern = "(R|RWY)\\d{2}([A-Z]\\/|\\/)(\\d{4}|[P]\\d{4}|\\d{4}(V|VP)\\d{4})(\\s|(N|U|D)|FT\\s|(FT\\/N|FT\\/U|FT\\/D))",
                                           simplify = TRUE)
   if (ncol(outvis_temp) > 0) {
     outvis <- rvr_code_extract(outvis_temp)
