@@ -4,13 +4,15 @@
 \alias{metar_get}
 \title{Get a current METAR report for an airport.}
 \usage{
-metar_get(airport = "EPWA")
+metar_get(airport = "EPWA", hours = 0)
 }
 \arguments{
 \item{airport}{character; ICAO or an IATA airport code.}
+
+\item{hours}{numeric; hours back to get METAR reports, limited do 24.}
 }
 \value{
-a character vector with a current METAR weather report.
+a character vector(s) with a current METAR weather report or recent reports.
 }
 \description{
 A current METAR weather report is downloaded from the web page of NOAA National Weather Service
@@ -22,5 +24,6 @@ metar_get("EPWA")
 metar_get("CYUL")
 metar_get("MAD")
 metar_get("WAW")
+metar_get("EPWR", hours = 4)
 
 }

@@ -13,6 +13,9 @@ metar_get("EPWA")
 ## ----get a METAR report with IATA code----------------------------------------
 metar_get("EWR")
 
+## ----get a current report and recent------------------------------------------
+
+
 ## ----label = "get historical METAR reports from JFK", eval = FALSE------------
 # dm <- metar_get_historical("JFK", start_date = "2020-06-27", end_date = "2020-06-29", from = "iastate")
 

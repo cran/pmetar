@@ -6,7 +6,7 @@
 #' [https://mesonet.agron.iastate.edu/AWOS/](https://mesonet.agron.iastate.edu/AWOS/)\cr
 #' The secondary source of METAR reports is Weather Information Service provided by Ogimet
 #' [https://www.ogimet.com/](https://www.ogimet.com/). However for this source
-#' the requested period is limited to 31 days. METAR reports are available from
+#' the requested period is limited to 365 days. METAR reports are available from
 #' the year 2005.
 #'
 #' @param airport character;  ICAO or IATA airport code.
@@ -28,8 +28,7 @@
 #' metar_get_historical("EPWA", start_date = "2017-11-20", end_date = "2017-11-25")
 #' metar_get_historical("MAD", start_date = "2015-06-01", end_date = "2015-06-02",
 #' from = "iastate")
-#' metar_get_historical("CYUL", start_date = "2016-07-01", end_date = "2016-07-05",
-#' from = "ogimet")
+#' metar_get_historical("CYUL", start_date = "2016-07-01", end_date = "2016-07-05", from = "ogimet")
 #' }
 #'
 metar_get_historical <- function(airport = "EPWA",
@@ -73,8 +72,8 @@ metar_get_historical <- function(airport = "EPWA",
   }
 
   # check the maximum period of 31 days for Ogimet web page
-  if(from == "ogimet" & (as.Date(end_date) - as.Date(start_date) > 31)) {
-    stop("pmetar package error: Period longer than 31 days for the Ogimet source!", call. = FALSE)
+  if(from == "ogimet" & (as.Date(end_date) - as.Date(start_date) > 365)) {
+    stop("pmetar package error: Period longer than 365 days for the Ogimet source!", call. = FALSE)
   }
 
   # check if start_date is not earlier than January 2005 for Ogimet web page
@@ -91,14 +90,10 @@ metar_get_historical <- function(airport = "EPWA",
     eyear <- stringr::str_sub(end_date, 1, 4)
     emonth <- stringr::str_sub(end_date, 6, 7)
     eday <- stringr::str_sub(end_date, 9, 10)
-    link <- paste0("www.ogimet.com/display_metars2.php?lang=en&lugar=",
-                   airport,"&tipo=SA&ord=DIR&nil=NO&fmt=txt&ano=",
-                   syear, "&mes=",
-                   smonth, "&day=",
-                   sday, "&hora=00&anof=",
-                   eyear, "&mesf=",
-                   emonth, "&dayf=",
-                   eday, "&horaf=23&minf=59&enviar=Ver")
+    link <- paste0("www.ogimet.com/cgi-bin/getmetar?lang=eng&header=yes",
+                   "&begin=", syear, smonth, sday, "0000",
+                   "&end=", eyear, emonth, eday, "2359",
+                   "&icao=", airport)
     message("Getting information from Weather Information Service http://www.ogimet.com/")
     message("developed by Guillermo Ballester Valor")
   } else if(from == "iastate"){
@@ -164,29 +159,17 @@ metar_get_historical <- function(airport = "EPWA",
     }
   )
 
-  ds <- utils::read.csv((textConnection(myfile)), stringsAsFactors = FALSE)
+
 
   if(from == "ogimet"){
-    text_pattern <- paste("#  METAR/SPECI from", airport)
-    ids <- which(ds[,1] == text_pattern) + 2
-    ide <- which(ds[,1] == "</pre>") - 1
-    ds <- as.data.frame(ds[ids:ide,1], stringsAsFactors = FALSE)
-    colnames(ds) <- c("x")
-    pattern <- "^[\\d]+\\s(?:METAR|SPECI)"
-    ds$x <- stringr::str_trim(ds$x)
-    idd <- stringr::str_detect(ds$x, pattern = pattern)
-    i <- 1
-    out <- data.frame(metar = "empty", stringsAsFactors = FALSE)
-    metartext <- "empty"
-    while(i < length(idd)){
-      if(idd[i]){
-        out <- rbind(out, metartext)
-        metartext <- ds[i,1]
-      } else metartext <- paste(metartext, ds[i,1])
-      i <- i + 1
-    }
-    out <- out[3:nrow(out),]
+    ds <- utils::read.csv((textConnection(myfile)), stringsAsFactors = FALSE,
+                          colClasses = rep("character", 7))
+    out <- ds %>% 
+      dplyr::mutate(metar_reports = paste0(ANO, MES, DIA, HORA, MINUTO, " ", PARTE)) %>% 
+      dplyr::select(metar_reports)
+    out <- out[,1]
   } else {
+    ds <- utils::read.csv((textConnection(myfile)), stringsAsFactors = FALSE)
     ds[,2] <- stringr::str_replace_all(ds[,2], "[[:punct:]]", "")
     ds[,2] <- stringr::str_replace_all(ds[,2], " ", "")
     ds[,3] <- stringr::str_trim(ds[,3])
