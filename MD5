@@ -1,4 +1,4 @@
-4d4e8faf755deab7b3449eafc07a0916 *DESCRIPTION
+03462cc33eba43fe359a49559c6fc0a1 *DESCRIPTION
 b8eca657f62f1e2a94eafaa2675cec2f *NAMESPACE
 502f518ae426b9833d3e5350823d64c8 *R/globals.R
 22c684d4e8e8d0c2d6c72927b30ce94e *R/metar_airport.R
@@ -7,8 +7,8 @@ b8eca657f62f1e2a94eafaa2675cec2f *NAMESPACE
 1fcd621917534277a74d63b835eb82a9 *R/metar_decode.R
 3b93de83168710eed3ce5bdc2d752b4b *R/metar_dew_point.R
 20c5111184e67875d32b5bf7b4193a2b *R/metar_dir.R
-a78216b5c861590cda6b416cc1f75525 *R/metar_get.R
-ee38d64915f981a5c2cdb53e923f4670 *R/metar_get_historical.R
+bc390b40bde8603d59f0dd72be224fe9 *R/metar_get.R
+0ffc25416a27f9b7cc8d53b6838a28dc *R/metar_get_historical.R
 757767c2dd2a8cba20dad282914d2b17 *R/metar_gust.R
 026c418545f8f3544958343d1e7e9fc9 *R/metar_hour.R
 635221a08fa63ff8f50f36f969d4e850 *R/metar_iata_icao.R
@@ -25,13 +25,13 @@ fef2515a493888c5d8a4a87131a37cb8 *R/metar_visibility.R
 100337a3ad7e0f38a5e394312f8880be *R/metar_wx_codes.R
 2c219eac45986e5f0f77d8c97506fa2e *R/pmetar-package.R
 ecb21c48c8794810393a5cc2d4410849 *README.md
-013b8dc81f913a5de7b35e1cdd02144c *build/vignette.rds
+aaff1df1595af08bcc4c6fde361cbafd *build/vignette.rds
 41945e186ee5a152eb604cda7efcc215 *data/metarWXcodes.rda
 e529bd0ec18e1fc1dfe1565da602766c *data/mst.rda
-67a12e1f808246f3b95c1a2d2d2d7f45 *data/ourairports.rda
+0ffd7c21f53c633f5db8062316a0c24f *data/ourairports.rda
 a77b457f85391d640bc5bde0ff3faa2b *inst/doc/pmetar.R
 09533c776c13ad8f6f75d43d7e263587 *inst/doc/pmetar.Rmd
-db03c7224befa683f40491ccde70d4a7 *inst/doc/pmetar.html
+71b2dc66a80f6eec22c6937a6be9ce26 *inst/doc/pmetar.html
 79539468852a0d9a750307291f03cf05 *man/metarWXcodes.Rd
 212cf3a828eff658070f99130dd5ecf3 *man/metar_airport.Rd
 50c2b267b6440b01763b9ed67697ac99 *man/metar_cloud_coverage.Rd
@@ -40,7 +40,7 @@ fd1c328e957004930ff1eb14f4dd2731 *man/metar_decode.Rd
 9ad4f622b2dd53518e308c2ec51a2f92 *man/metar_dew_point.Rd
 843547ab320a26ba3976e65867e2c297 *man/metar_dir.Rd
 d32233c9c83416a4afd6334d44411800 *man/metar_get.Rd
-f8cfe7c0e41fad43adc0ba752d625607 *man/metar_get_historical.Rd
+6535de186580e8e23e75d656e34f6de2 *man/metar_get_historical.Rd
 286f6e0d7c5fff10661805b516c66e5a *man/metar_gust.Rd
 abc00a7fed4de5862e9312edc5d3b579 *man/metar_hour.Rd
 2bc9ca75a998eef6b629b92b4ae3e14b *man/metar_iata_icao.Rd
@@ -57,7 +57,7 @@ b3dbe5f55a2aebe95de65fd5aa9b27a6 *man/metar_windshear.Rd
 eadbfd7c1dae4ccfd238b1b8624e0435 *man/metar_wx_codes.Rd
 f32e5bd52db45305065a65daff223a98 *man/mst.Rd
 7dd1bd6dadced9c05d64061fc2bf5c93 *man/ourairports.Rd
-8245d0a896ec71f793991e739a242b99 *man/pmetar-package.Rd
+eebb018861214634ead9017c172aee5e *man/pmetar-package.Rd
 49ae12abbe1d9f55ba214d478bc4dff5 *tests/testthat.R
 c2eb572c0618bb4da99406ebf5009601 *tests/testthat/test_metar_airport.R
 a3e0314867599b6f3058826d42b64568 *tests/testthat/test_metar_cloud_coverage.R
@@ -65,12 +65,12 @@ dcabfe6d0b1b4856c61565d9795f53e3 *tests/testthat/test_metar_day.R
 b2e07417704e084f3089c689e87e2a51 *tests/testthat/test_metar_dew_point.R
 9491627a5ede7a7eb0d4abe364ca7203 *tests/testthat/test_metar_dir.R
 7f672588042955eb32d5a3f070ff899b *tests/testthat/test_metar_get.R
-f18552e3a28e2fc27b9c0bd8563d9dfb *tests/testthat/test_metar_get_historical.R
+ff324a06d8e66b8a67e71520a6c705c0 *tests/testthat/test_metar_get_historical.R
 8f030afadfccfba5fe821b59ba05fdf7 *tests/testthat/test_metar_gust.R
 be6648632b3db7fbd92d98b3fc5a5435 *tests/testthat/test_metar_hour.R
 501eee7e8d2c6e57ac1558fd0d1ef21a *tests/testthat/test_metar_iata_icao.R
 39471c88131398ab2d057e5ac619ffba *tests/testthat/test_metar_is_correct.R
-4db04211375a8aa95985c6bc238a03b0 *tests/testthat/test_metar_location.R
+531ca3bd4afae9684675dd58d5642b6c *tests/testthat/test_metar_location.R
 ab59f2a95504e946878974174d290e2a *tests/testthat/test_metar_pressure.R
 c8a673ff4e06c0639306c22864c9a342 *tests/testthat/test_metar_rwy_visibility.R
 eba93192518a0621598f05acf7b5f49a *tests/testthat/test_metar_speed.R
